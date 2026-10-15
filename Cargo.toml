@@ -1,0 +1,17 @@
+[package]
+name = "unpriced"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+eframe = { version = "0.36", features = ["persistence"] }
+
+# Dependencies (egui, wgpu, winit) are compiled optimized even in dev builds,
+# so `cargo run` renders smoothly while our own crate still compiles fast.
+[profile.dev.package."*"]
+opt-level = 3
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
+strip = true
